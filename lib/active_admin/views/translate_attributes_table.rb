@@ -18,9 +18,11 @@ module ActiveAdmin
               end
             end
             td do
-              ::I18n.with_locale locale do
-                content_for(block || attr)
+              lang = "<strong>#{::I18n.t(locale, scope: 'active_admin.translate')}: </strong>".html_safe
+              content = ::I18n.with_locale locale do
+                content_for(resource, block || attr)
               end
+              lang + content
             end
           end
         end
